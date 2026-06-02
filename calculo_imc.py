@@ -1,44 +1,27 @@
-# Programador 1: Lógica Matemática
-def calcular_imc(peso, altura):
-    imc = peso / (altura ** 2)
-    return imc
+def calcular_rendimento_mes(saldo_atual, deposito, taxa):
+    novo_saldo = saldo_atual + deposito
+    rendimento = novo_saldo * taxa
+    resultado_final = novo_saldo + rendimento
+    return resultado_final
 
-# Programador 2: Classificação de Dados
-def classificar(valor_imc):
-    if valor_imc < 25:
-        return "NORMAL"
-    else:
-        return "ACIMA DO PESO"
 
-# Programador 3: Especialista em Conteúdo
-def gerar_aviso(status):
-    if status == "NORMAL":
-        return "Continue mantendo hábitos saudáveis, como uma dieta equilibrada e exercícios regulares."
-    elif status == "ACIMA DO PESO":
-        return "Que tal incluir mais atividades físicas na sua rotina e consultar um nutricionista para reavaliar a dieta?"
+def mostrar_extrato(mes_atual, valor_total):
+    print("Mes", mes_atual, ": Saldo total: R$", valor_total)
 
-# Programador 4: Engenheiro de Integração (Fluxo Principal)
-def main():
-    # Solicitando dados ao usuário
-    try:
-        peso = float(input("Digite o seu peso (em kg): "))
-        altura = float(input("Digite a sua altura (em metros): "))
-        
-        # Chamando as funções na ordem correta
-        imc_calculado = calcular_imc(peso, altura)
-        status_imc = classificar(imc_calculado)
-        aviso = gerar_aviso(status_imc)
-        
-        # Exibindo os resultados finais
-        print("\n--- Resultados ---")
-        print(f"IMC Calculado: {imc_calculado:.2f}")
-        print(f"Classificação: {status_imc}")
-        print(f"Recomendação: {aviso}")
-        
-    except ValueError:
-        print("Erro: Por favor, digite valores numéricos válidos para peso e altura.")
 
-# Execução do programa
-if __name__ == "__main__":
-    main()
+def mostrar_resultado_final(total_meses, valor_final):
+    print("Ao final de", total_meses, "meses, Voce tera o valor de R$:", valor_final)
 
+
+aparte = float(input("Quanto vc vai depositar por mes? "))
+juros = float(input("Qual a taxa de juros da poupança? "))
+meses = int(input("Por quantos meses vc ira investir? "))
+
+juros_decimal = juros / 100
+total = 0
+
+for mes in range(1, meses + 1):
+    total = calcular_rendimento_mes(total, aparte, juros_decimal)
+    mostrar_extrato(mes, total)
+
+mostrar_resultado_final(meses, total)
